@@ -1,0 +1,12 @@
+---
+- name: create readstore database
+  command: bash -lc "mix do ecto.create, ecto.migrate" chdir="{{ project_path }}"
+  remote_user: "{{ deployer }}"
+  environment:
+    MIX_ENV: "{{ mix_env }}"
+
+- name: create eventstore database
+  command: bash -lc "mix do event_store.create, event_store.init" chdir="{{ project_path }}"
+  remote_user: "{{ deployer }}"
+  environment:
+    MIX_ENV: "{{ mix_env }}"

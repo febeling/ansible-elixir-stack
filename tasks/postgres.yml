@@ -1,6 +1,5 @@
 ---
 - name: "add postgres repository"
-  # 16.04 lts
   apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
 
 
@@ -24,11 +23,5 @@
     name: "{{ deployer }}"
     password: "{{ database_password }}"
     role_attr_flags: CREATEDB,SUPERUSER
-  become: yes
-  become_user: postgres
-
-
-- name: "create database"
-  postgresql_db: name="{{ database_name }}" encoding="UTF-8"
   become: yes
   become_user: postgres

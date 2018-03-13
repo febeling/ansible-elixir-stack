@@ -10,7 +10,8 @@
   remote_user: "{{ deployer }}"
 
 
-- name: "compile and release"
+- when: deploy_type != "none"
+  name: "compile and release"
   command: bash -lc 'SERVER=1 mix do compile, release' chdir="{{ project_path }}"
   remote_user: "{{ deployer }}"
   environment:
