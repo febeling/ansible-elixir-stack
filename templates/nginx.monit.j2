@@ -1,6 +1,6 @@
 check process nginx with pidfile /run/nginx.pid
-       start program = "systemctl start nginx.service"
-       stop program  = "systemctl stop nginx.service"
+       start program = "/bin/systemctl start nginx.service"
+       stop program  = "/bin/systemctl stop nginx.service"
        {% for alert_email in nginx_alert_emails %}
          alert {{ alert_email }}
        {% endfor %}
