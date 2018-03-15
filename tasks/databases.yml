@@ -4,6 +4,7 @@
   register: readstore_database_exists
   become: true
   become_user: postgres
+  ignore_errors: true
 
 
 - when: readstore_database_exists.rc != 0
@@ -19,6 +20,7 @@
   register: eventstore_database_exists
   become: true
   become_user: postgres
+  ignore_errors: true
 
 
 - when: eventstore_database_exists.rc != 0
@@ -27,4 +29,3 @@
   remote_user: "{{ deployer }}"
   environment:
     MIX_ENV: "{{ mix_env }}"
-
