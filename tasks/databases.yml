@@ -1,12 +1,30 @@
 ---
-- name: create readstore database
+- name: check if readstore database exists
+  command: bash -lc "psql {{ database_name }} -c ''"
+  register: readstore_database_exists
+  become: true
+  become_user: postgres
+
+
+- when: readstore_database_exists.rc != 0
+  name: create readstore database
   command: bash -lc "mix do ecto.create, ecto.migrate" chdir="{{ project_path }}"
   remote_user: "{{ deployer }}"
   environment:
     MIX_ENV: "{{ mix_env }}"
 
-- name: create eventstore database
+
+- name: check if eventstore database exists
+  command: bash -lc "psql {{ eventstore_database_name }} -c ''"
+  register: eventstore_database_exists
+  become: true
+  become_user: postgres
+
+
+- when: eventstore_database_exists.rc != 0
+  name: create eventstore database
   command: bash -lc "mix do event_store.create, event_store.init" chdir="{{ project_path }}"
   remote_user: "{{ deployer }}"
   environment:
     MIX_ENV: "{{ mix_env }}"
+
