@@ -17,7 +17,8 @@
 
 - when: setup_postgres == True
   include: postgres-facts.yml
-
+  tags:
+    - debug
 
 - when: setup_postgres == True
   include: postgres.yml
