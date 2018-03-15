@@ -18,7 +18,7 @@
 
 
 - name: reload nginx
-  command: "nginx -s reload"
+  service: name=nginx state=reloaded
 
 
 - name: remove monit config for app
