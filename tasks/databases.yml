@@ -1,6 +1,6 @@
 ---
 - name: check if readstore database exists
-  command: bash -lc "psql {{ database_name }} -c ''"
+  command: bash -lc "psql {{ readstore_database_name }} -c ''"
   register: readstore_database_exists
   become: true
   become_user: postgres
