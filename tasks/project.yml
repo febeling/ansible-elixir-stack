@@ -14,6 +14,13 @@
   async: 1800
   remote_user: "{{ deployer }}"
 
+# Run two times - work around bug in asdf-erlang
+# see: https://github.com/asdf-vm/asdf-erlang/issues/57
+- name: "install tool versions"
+  command: bash -lc 'asdf install' chdir="{{ project_path }}"
+  async: 1800
+  remote_user: "{{ deployer }}"
+
 
 - name: "generate secret key base"
   command: "openssl rand -base64 {{ secret_key_base_length }}"
