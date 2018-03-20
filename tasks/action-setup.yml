@@ -1,5 +1,5 @@
 ---
-- include: common.yml
+- import_tasks: common.yml
 
 - name: "check for swap file path"
   stat: path="/swap"
@@ -7,34 +7,34 @@
 
 
 - when: create_swap_file == True and swap_info.stat.exists == False
-  include: create-swap-file.yml
+  import_tasks: create-swap-file.yml
 
 
-- include: pip.yml
-- include: deployer-user.yml
-- include: asdf.yml
+- import_tasks: pip.yml
+- import_tasks: deployer-user.yml
+- import_tasks: asdf.yml
 
 
 - when: setup_postgres == True
-  include: postgres-facts.yml
+  import_tasks: postgres-facts.yml
   tags:
     - debug
 
 - when: setup_postgres == True
-  include: postgres.yml
+  import_tasks: postgres.yml
 
 
-- include: project.yml
+- import_tasks: project.yml
 
 
 - when: build_frontend == True
-  include: frontend.yml
+  import_tasks: frontend.yml
 
 
-- include: nginx.yml
-- include: monit.yml
-- include: release.yml
-- include: databases.yml
+- import_tasks: nginx.yml
+- import_tasks: monit.yml
+- import_tasks: release.yml
+- import_tasks: databases.yml
 
 
 - name: start nginx using monit

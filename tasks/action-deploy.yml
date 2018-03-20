@@ -1,16 +1,16 @@
 ---
 - when: setup_postgres == True
-  include: postgres-facts.yml
+  import_tasks: postgres-facts.yml
 
 
-- include: project.yml
+- import_tasks: project.yml
 
 
 - when: build_frontend == True
-  include: frontend.yml
+  import_tasks: frontend.yml
 
 
-- include: release.yml
+- import_tasks: release.yml
 
 
 - name: start nginx using monit

@@ -1,15 +1,15 @@
 ---
 - when: action == "remove-app"
-  include: action-remove-app.yml
+  import_tasks: action-remove-app.yml
 
 - when: action == "setup"
-  include: action-setup.yml
+  import_tasks: action-setup.yml
 
 - when: action == "deploy"
-  include: action-deploy.yml
+  import_tasks: action-deploy.yml
 
 - when: action == "migrate"
-  include: action-migrate.yml
+  import_tasks: action-migrate.yml
 
 - when: action == "run-cmd"
-  include: action-run-cmd.yml
+  import_tasks: action-run-cmd.yml
