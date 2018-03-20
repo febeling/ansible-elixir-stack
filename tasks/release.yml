@@ -8,9 +8,11 @@
   name: delete release
   command: bash -lc "mix release.clean" chdir="{{ project_path }}"
   remote_user: "{{ deployer }}"
+  environment:
+    MIX_ENV: "{{ mix_env }}"
 
 
-- when: deploy_type != "none"
+- when: deploy_type == "restart"
   name: "compile and release"
   command: bash -lc 'SERVER=1 mix do compile, release' chdir="{{ project_path }}"
   remote_user: "{{ deployer }}"
@@ -24,11 +26,15 @@
   monit: name="{{ app_name }}" state=started
 
 
+
+
 - when: deploy_type == "upgrade"
   name: get app version
   command: bash -lc "mix run -e 'IO.puts Mix.Project.config[:version]'" chdir="{{ project_path }}"
   remote_user: "{{ deployer }}"
   register: app_version
+  environment:
+    MIX_ENV: "{{ mix_env }}"
 
 
 - when: deploy_type == "upgrade"

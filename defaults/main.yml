@@ -14,6 +14,9 @@ frontend_dir: ""
 frontend_build_command: "$(npm bin)/brunch build --production"
 post_frontend_build: "mix phoenix.digest"
 
+repo_regex: '[\.[:alnum:]]*.Repo'
+endpoint_regex: '[\.[:alnum:]]*.Endpoint'
+
 deployer: deployer
 
 domains: []
