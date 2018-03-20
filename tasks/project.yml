@@ -99,3 +99,13 @@
   remote_user: "{{ deployer }}"
   environment:
     MIX_ENV: "{{ mix_env }}"
+
+
+- name: "create empty application log file"
+  copy:
+    content: ""
+    dest: "/var/log/{{ app_name }}.log"
+    force: no
+    owner: "{{ deployer }}"
+    group: adm
+    mode: 0640
